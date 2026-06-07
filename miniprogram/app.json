@@ -1,0 +1,40 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/search/search",
+    "pages/settings/settings"
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#0a0a0a",
+    "navigationBarTitleText": "重型演出雷达",
+    "navigationBarTextStyle": "white",
+    "backgroundColor": "#0a0a0a"
+  },
+  "tabBar": {
+    "color": "#666",
+    "selectedColor": "#e63946",
+    "backgroundColor": "#111",
+    "borderStyle": "black",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "assets/tab-home.png",
+        "selectedIconPath": "assets/tab-home-active.png"
+      },
+      {
+        "pagePath": "pages/search/search",
+        "text": "搜索",
+        "iconPath": "assets/tab-search.png",
+        "selectedIconPath": "assets/tab-search-active.png"
+      },
+      {
+        "pagePath": "pages/settings/settings",
+        "text": "设置",
+        "iconPath": "assets/tab-settings.png",
+        "selectedIconPath": "assets/tab-settings-active.png"
+      }
+    ]
+  },
+  "sitemapLocation": "sitemap.json"
+}

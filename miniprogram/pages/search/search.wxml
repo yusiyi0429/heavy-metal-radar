@@ -1,0 +1,29 @@
+<view class="container">
+  <view class="search-bar">
+    <input
+      class="search-input"
+      placeholder="搜索艺人名、城市..."
+      placeholder-style="color: #555"
+      value="{{query}}"
+      bindinput="onInput"
+      bindconfirm="onSearch"
+      confirm-type="search"
+    />
+    <view class="search-btn" bindtap="onSearch">搜索</view>
+  </view>
+
+  <view class="filter-row">
+    <label class="toggle-label">
+      <switch checked="{{onlyOnSale}}" bindchange="onToggleFilter" color="#e63946" />
+      <text>仅显示可购票</text>
+    </label>
+  </view>
+
+  <view wx:if="{{searched && shows.length === 0}}" class="empty-state">
+    <text class="empty-text">未找到匹配演出</text>
+  </view>
+
+  <view class="show-list">
+    <show-card wx:for="{{shows}}" wx:key="_id" show="{{item}}" />
+  </view>
+</view>

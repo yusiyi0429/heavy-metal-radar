@@ -1,0 +1,20 @@
+<view class="card">
+  <view class="card-header">
+    <text class="artist">{{show.artist || show.title}}</text>
+    <view class="status" style="background: {{statusInfo().color}}">
+      {{statusInfo().label}}
+    </view>
+  </view>
+  <view class="card-meta">
+    <text class="city">{{show.city}}</text>
+    <text class="divider">|</text>
+    <text class="venue">{{show.venue}}</text>
+  </view>
+  <view class="card-date">{{show.date}}</view>
+  <view class="card-footer">
+    <view class="platform-tag">
+      <text>{{platformEmoji()}} {{platformLabel()}}</text>
+    </view>
+    <view class="buy-btn" bindtap="onBuy">购票</view>
+  </view>
+</view>

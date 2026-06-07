@@ -1,0 +1,32 @@
+<view class="container">
+  <view class="top-bar">
+    <view class="title">重型演出雷达</view>
+    <view class="filter-row">
+      <picker mode="selector" range="{{cities}}" value="{{cities.indexOf(selectedCity)}}" bindchange="onCityChange">
+        <view class="city-picker">
+          <text>{{selectedCity || '全部城市'}}</text>
+          <text class="arrow">▾</text>
+        </view>
+      </picker>
+      <view class="refresh-btn" bindtap="onRefresh">刷新</view>
+    </view>
+  </view>
+
+  <view wx:if="{{loading && shows.length === 0}}" class="loading-state">
+    <text>加载中...</text>
+  </view>
+
+  <view wx:elif="{{empty}}" class="empty-state">
+    <text class="empty-icon">🎸</text>
+    <text class="empty-text">暂无演出</text>
+    <text class="empty-hint">点击刷新开始抓取</text>
+  </view>
+
+  <view wx:else class="show-list">
+    <show-card wx:for="{{shows}}" wx:key="_id" show="{{item}}" />
+  </view>
+
+  <view wx:if="{{refreshing}}" class="refresh-indicator">
+    <text>刷新中...</text>
+  </view>
+</view>

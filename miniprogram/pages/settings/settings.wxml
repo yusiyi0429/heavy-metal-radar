@@ -1,0 +1,59 @@
+<view class="container">
+  <view class="section">
+    <view class="section-title">关键词管理</view>
+    <view class="tag-list">
+      <view class="tag" wx:for="{{keywords}}" wx:key="*this">
+        <text>{{item}}</text>
+        <text class="tag-remove" data-index="{{index}}" bindtap="removeKeyword">×</text>
+      </view>
+    </view>
+    <view class="add-row">
+      <input
+        class="add-input"
+        placeholder="输入关键词（中英文均可）"
+        placeholder-style="color: #555"
+        value="{{keywordInput}}"
+        bindinput="onKeywordInput"
+        bindconfirm="addKeyword"
+      />
+      <view class="add-btn" bindtap="addKeyword">添加</view>
+    </view>
+  </view>
+
+  <view class="section">
+    <view class="section-title">关注城市</view>
+    <view class="tag-list">
+      <view class="tag" wx:for="{{cities}}" wx:key="*this">
+        <text>{{item}}</text>
+        <text class="tag-remove" data-index="{{index}}" bindtap="removeCity">×</text>
+      </view>
+    </view>
+    <view class="add-row">
+      <input
+        class="add-input"
+        placeholder="输入城市名"
+        placeholder-style="color: #555"
+        value="{{cityInput}}"
+        bindinput="onCityInput"
+        bindconfirm="addCity"
+      />
+      <view class="add-btn" bindtap="addCity">添加</view>
+    </view>
+  </view>
+
+  <view class="section">
+    <view class="section-title">推送设置</view>
+    <view class="toggle-row">
+      <text>启用推送通知</text>
+      <switch checked="{{enablePush}}" bindchange="onPushToggle" color="#e63946" />
+    </view>
+  </view>
+
+  <view class="save-btn" bindtap="onSave">
+    <text>{{saving ? '保存中...' : '保存设置'}}</text>
+  </view>
+
+  <view class="danger-btn" bindtap="onReset">
+    <text>清除演出记录</text>
+  </view>
+</view>

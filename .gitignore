@@ -1,0 +1,6 @@
+backend/data/*.json
+__pycache__/
+*.pyc
+node_modules/
+.DS_Store
+miniprogram/assets/tab-*.png

@@ -1,0 +1,23 @@
+page {
+  --bg: #0a0a0a;
+  --surface: #141414;
+  --surface-raised: #1c1c1c;
+  --text-primary: #f0f0f0;
+  --text-secondary: #888;
+  --accent: #e63946;
+  --accent-glow: #ff6b6b;
+  --status-on-sale: #2ecc71;
+  --status-upcoming: #f39c12;
+  --status-sold-out: #888;
+  --border: #222;
+
+  background: var(--bg);
+  color: var(--text-primary);
+  font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Helvetica Neue', sans-serif;
+  min-height: 100vh;
+}
+
+.container {
+  padding: 0 16px;
+  padding-bottom: 20px;
+}
