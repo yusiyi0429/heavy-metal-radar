@@ -39,12 +39,10 @@ def send_show_notification(show, webhook_url):
 
 
 def notify_new_shows(shows, webhook_url):
-    if not shows:
-        return 0
-    notified = 0
+    notified_ids = []
     for s in shows:
-        if not s.get("notified") and not s.get("notified_at"):
+        if not s.get("notified"):
             ok = send_show_notification(s, webhook_url)
             if ok:
-                notified += 1
-    return notified
+                notified_ids.append(s["_id"])
+    return notified_ids

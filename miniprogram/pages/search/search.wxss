@@ -1,53 +1,70 @@
+/* === 搜索页 — Brutal Industrial === */
+
 .search-bar {
   display: flex;
   align-items: center;
-  padding: 16px 0 8px;
+  padding: 24px 0 18px;
 }
 
 .search-input {
   flex: 1;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 10px 14px;
-  font-size: 15px;
-  color: var(--text-primary);
+  background: #111111;
+  border: 1px solid #2a2a2a;
+  box-shadow: 2px 2px 0 #000000;
+  padding: 12px 14px;
+  font-size: 14px;
+  font-weight: 600;
+  color: #cccccc;
+  letter-spacing: 1px;
 }
 
 .search-btn {
-  background: var(--accent);
-  color: #fff;
-  font-size: 14px;
-  font-weight: 600;
-  padding: 10px 20px;
-  border-radius: 8px;
-  margin-left: 10px;
+  background: #c62828;
+  border: 1px solid #7f1d1d;
+  box-shadow: 3px 3px 0 #000000;
+  color: #eeeeee;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: 4px;
+  padding: 12px 20px;
+  margin-left: 12px;
+}
+
+.search-btn:active {
+  background: #991b1b;
+  transform: translate(1px, 1px);
+  box-shadow: 1px 1px 0 #000000;
 }
 
 .filter-row {
-  padding: 8px 0 12px;
+  padding: 10px 0 22px;
+  border-bottom: 1px solid #1a1a1a;
+  margin-bottom: 10px;
 }
 
 .toggle-label {
   display: flex;
   align-items: center;
-  font-size: 13px;
-  color: var(--text-secondary);
-  gap: 8px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #777777;
+  letter-spacing: 2px;
 }
 
 .empty-state {
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-top: 100px;
+  padding-top: 160px;
 }
 
 .empty-text {
-  font-size: 15px;
-  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 800;
+  color: #444444;
+  letter-spacing: 6px;
 }
 
 .show-list {
-  padding-top: 8px;
+  padding-top: 4px;
 }

@@ -8,8 +8,6 @@ Component({
     },
   },
 
-  computed: {},
-
   methods: {
     onBuy() {
       const url = this.data.show.url

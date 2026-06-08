@@ -1,7 +1,7 @@
 import time
 import logging
 import schedule
-from backend.db import get_config
+from backend.db import get_config, mark_notified
 from backend.fetchers import ShowstartFetcher, DamaiFetcher
 from backend.notifier.wecom_bot import notify_new_shows
 
@@ -31,8 +31,10 @@ def run_all():
 
     if all_new and cfg.get("enable_push"):
         unnotified = [s for s in all_new if not s.get("notified")]
-        count = notify_new_shows(unnotified, webhook_url)
-        logger.info(f"已推送 {count} 条通知")
+        notified_ids = notify_new_shows(unnotified, webhook_url)
+        if notified_ids:
+            mark_notified(notified_ids)
+        logger.info(f"已推送 {len(notified_ids)} 条通知")
 
 
 if __name__ == "__main__":

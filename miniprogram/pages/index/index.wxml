@@ -1,9 +1,10 @@
 <view class="container">
-  <view class="top-bar">
+  <view class="title-bar">
     <view class="title">重型演出雷达</view>
-    <view class="filter-row">
+    <text class="subtitle">HEAVY METAL RADAR</text>
+    <view class="toolbar">
       <picker mode="selector" range="{{cities}}" value="{{cities.indexOf(selectedCity)}}" bindchange="onCityChange">
-        <view class="city-picker">
+        <view class="city-btn">
           <text>{{selectedCity || '全部城市'}}</text>
           <text class="arrow">▾</text>
         </view>
@@ -12,21 +13,21 @@
     </view>
   </view>
 
-  <view wx:if="{{loading && shows.length === 0}}" class="loading-state">
-    <text>加载中...</text>
+  <view wx:if="{{loading && shows.length === 0}}" class="loading-box">
+    <text>LOADING...</text>
   </view>
 
-  <view wx:elif="{{empty}}" class="empty-state">
-    <text class="empty-icon">🎸</text>
-    <text class="empty-text">暂无演出</text>
-    <text class="empty-hint">点击刷新开始抓取</text>
+  <view wx:elif="{{empty}}" class="empty-box">
+    <text class="empty-emoji">🎸</text>
+    <text class="empty-t">暂无演出</text>
+    <text class="empty-h">点击刷新开始抓取</text>
   </view>
 
-  <view wx:else class="show-list">
+  <view wx:else class="list-wrap">
     <show-card wx:for="{{shows}}" wx:key="_id" show="{{item}}" />
   </view>
 
-  <view wx:if="{{refreshing}}" class="refresh-indicator">
-    <text>刷新中...</text>
+  <view wx:if="{{refreshing}}" class="toast">
+    <text>REFRESHING...</text>
   </view>
 </view>

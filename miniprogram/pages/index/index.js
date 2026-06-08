@@ -5,13 +5,12 @@ Page({
     shows: [],
     cities: [],
     selectedCity: '',
-    loading: false,
+    loading: true,
     refreshing: false,
     empty: false,
   },
 
   onLoad() {
-    this.loadConfig()
     this.loadShows()
   },
 
@@ -26,7 +25,9 @@ Page({
   loadConfig() {
     getConfig().then(cfg => {
       this.setData({ cities: cfg.cities || [], selectedCity: '' })
-    }).catch(() => {})
+    }).catch(() => {
+      wx.showToast({ title: '加载配置失败', icon: 'none' })
+    })
   },
 
   loadShows() {
@@ -34,17 +35,25 @@ Page({
     const params = {}
     if (this.data.selectedCity) params.city = this.data.selectedCity
 
-    return getShows(params)
-      .then(data => {
+    // 同时拉全量数据（供城市列表）和筛选数据（供展示）
+    return Promise.all([getShows({}), getShows(params)])
+      .then(([all, filtered]) => {
         this.setData({
-          shows: data.shows || [],
-          empty: (data.shows || []).length === 0,
+          shows: filtered.shows || [],
+          empty: (filtered.shows || []).length === 0,
+          cities: this.extractCities(all.shows || []),
         })
       })
       .catch(() => {
         wx.showToast({ title: '加载失败，请检查后端是否启动', icon: 'none' })
       })
       .finally(() => this.setData({ loading: false }))
+  },
+
+  extractCities(shows) {
+    const citySet = new Set()
+    shows.forEach(s => { if (s.city) citySet.add(s.city) })
+    return Array.from(citySet).sort()
   },
 
   onCityChange(e) {

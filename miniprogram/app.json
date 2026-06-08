@@ -6,33 +6,27 @@
   ],
   "window": {
     "navigationBarBackgroundColor": "#0a0a0a",
-    "navigationBarTitleText": "重型演出雷达",
+    "navigationBarTitleText": "HEAVY METAL RADAR",
     "navigationBarTextStyle": "white",
     "backgroundColor": "#0a0a0a"
   },
   "tabBar": {
-    "color": "#666",
-    "selectedColor": "#e63946",
-    "backgroundColor": "#111",
+    "color": "#555",
+    "selectedColor": "#cc2222",
+    "backgroundColor": "#0a0a0a",
     "borderStyle": "black",
     "list": [
       {
         "pagePath": "pages/index/index",
-        "text": "首页",
-        "iconPath": "assets/tab-home.png",
-        "selectedIconPath": "assets/tab-home-active.png"
+        "text": "演出"
       },
       {
         "pagePath": "pages/search/search",
-        "text": "搜索",
-        "iconPath": "assets/tab-search.png",
-        "selectedIconPath": "assets/tab-search-active.png"
+        "text": "搜索"
       },
       {
         "pagePath": "pages/settings/settings",
-        "text": "设置",
-        "iconPath": "assets/tab-settings.png",
-        "selectedIconPath": "assets/tab-settings-active.png"
+        "text": "设置"
       }
     ]
   },

@@ -53,7 +53,7 @@ scripts/
 # 后端
 cd backend && pip install -r requirements.txt
 python scripts/init_data.py    # 初始化种子数据
-python -m backend.server        # 启动 API (127.0.0.1:5000)
+python -m backend.server        # 启动 API (127.0.0.1:5001)
 
 # 定时调度器（独立进程）
 python -m backend.scheduler
@@ -67,5 +67,5 @@ python -m backend.scheduler
 - 演出唯一键：platform + showId
 - 抓取失败返回空列表，不抛异常，不阻塞主流程
 - 企微 Webhook URL 在 config.json 中，gitignore 防止泄露
-- 本地开发 API 端口 5000，小程序 urlCheck 关闭
+- 本地开发 API 端口 5001，小程序 urlCheck 关闭
 - 前端请求基座 URL 定义在 app.js globalData.baseUrl

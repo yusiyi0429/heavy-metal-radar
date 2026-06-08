@@ -14,7 +14,7 @@
 
   <view class="filter-row">
     <label class="toggle-label">
-      <switch checked="{{onlyOnSale}}" bindchange="onToggleFilter" color="#e63946" />
+      <switch checked="{{onlyOnSale}}" bindchange="onToggleFilter" color="#c62828" />
       <text>仅显示可购票</text>
     </label>
   </view>

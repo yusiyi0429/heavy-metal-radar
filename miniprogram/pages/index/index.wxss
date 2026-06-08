@@ -1,79 +1,151 @@
-.top-bar {
-  padding: 20px 0 12px;
+/* === 首页 — Death Metal Industrial === */
+
+.title-bar {
+  padding: 32px 0 22px;
+  border-bottom: 2px solid #1a1a1a;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+/* 底部锈蚀线 */
+.title-bar::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -2px;
+  height: 2px;
+  background: linear-gradient(90deg, transparent 0%, #7f1d1d 20%, #c62828 50%, #7f1d1d 80%, transparent 100%);
 }
 
 .title {
-  font-size: 24px;
-  font-weight: 800;
-  color: var(--accent);
-  letter-spacing: 2px;
-  margin-bottom: 14px;
+  font-size: 30px;
+  font-weight: 900;
+  font-style: italic;
+  letter-spacing: 6px;
+  color: #dddddd;
+  text-shadow: 3px 3px 0 #000000, 0 0 20px rgba(198,40,40,0.35);
+  line-height: 1.2;
+  display: block;
+  margin-bottom: 4px;
 }
 
-.filter-row {
+.subtitle {
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 10px;
+  color: #555555;
+  display: block;
+  margin-bottom: 18px;
+}
+
+.toolbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.city-picker {
+.city-btn {
   display: flex;
   align-items: center;
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  padding: 6px 14px;
-  font-size: 14px;
-  color: var(--text-primary);
+  background: #111111;
+  border: 1px solid #2a2a2a;
+  box-shadow: 2px 2px 0 #000000;
+  padding: 8px 14px;
+  font-size: 12px;
+  font-weight: 700;
+  color: #888888;
+  letter-spacing: 2px;
 }
 
 .arrow {
-  margin-left: 6px;
-  color: var(--text-secondary);
-  font-size: 11px;
+  color: #ef4444;
+  margin-left: 8px;
+  font-size: 10px;
 }
 
 .refresh-btn {
-  background: var(--accent);
-  color: #fff;
-  font-size: 14px;
-  font-weight: 600;
-  padding: 7px 22px;
-  border-radius: 6px;
+  background: linear-gradient(180deg, #c62828, #8b1a1a);
+  border: 1px solid #7f1d1d;
+  box-shadow: 3px 3px 0 #000000;
+  color: #eeeeee;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 6px;
+  padding: 9px 22px;
+  text-shadow: 2px 2px 0 rgba(0,0,0,0.5);
 }
 
-.loading-state,
-.empty-state {
+.refresh-btn:active {
+  transform: translate(1px, 1px);
+  box-shadow: 1px 1px 0 #000000;
+}
+
+/* Loading */
+.loading-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 180px;
+}
+
+.loading-box text {
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: 6px;
+  color: #444444;
+  animation: pulse 1.4s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+/* Empty */
+.empty-box {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding-top: 120px;
-  color: var(--text-secondary);
+  padding-top: 140px;
 }
 
-.empty-icon {
-  font-size: 48px;
-  margin-bottom: 16px;
+.empty-emoji {
+  font-size: 56px;
+  display: block;
+  margin-bottom: 20px;
+  opacity: 0.2;
 }
 
-.empty-text {
-  font-size: 16px;
+.empty-t {
+  font-size: 15px;
+  font-weight: 900;
+  letter-spacing: 6px;
+  color: #444444;
+  display: block;
   margin-bottom: 8px;
 }
 
-.empty-hint {
-  font-size: 13px;
-  color: #555;
+.empty-h {
+  font-size: 11px;
+  font-weight: 600;
+  color: #333333;
+  letter-spacing: 2px;
+  display: block;
 }
 
-.show-list {
-  padding-top: 12px;
+/* List wrapper */
+.list-wrap {
+  padding-top: 6px;
 }
 
-.refresh-indicator {
+/* Refreshing toast */
+.toast {
   text-align: center;
-  padding: 12px;
-  color: var(--text-secondary);
-  font-size: 12px;
+  padding: 16px;
+  color: #444444;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 4px;
 }

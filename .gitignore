@@ -4,3 +4,9 @@ __pycache__/
 node_modules/
 .DS_Store
 miniprogram/assets/tab-*.png
+*.deb
+.claude/
+chromium/
+node_modules/
+package-lock.json
+package.json

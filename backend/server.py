@@ -1,3 +1,5 @@
+from datetime import datetime, timezone
+
 from flask import Flask, request, jsonify
 from backend.db import get_config, set_config, get_shows, mark_notified, reset_shows
 from backend.fetchers import ShowstartFetcher, DamaiFetcher
@@ -20,7 +22,7 @@ def after_request(response):
 
 @app.route("/api/health")
 def health():
-    return jsonify({"ok": True, "timestamp": __import__("datetime").datetime.now(__import__("datetime").timezone.utc).isoformat()})
+    return jsonify({"ok": True, "timestamp": datetime.now(timezone.utc).isoformat()})
 
 
 @app.route("/api/config", methods=["GET", "PUT"])
@@ -48,18 +50,13 @@ def list_shows():
 @app.route("/api/fetch", methods=["POST"])
 def fetch():
     cfg = get_config()
-    keywords = cfg.get("keywords", [])
     cities = cfg.get("cities", [])
 
     ss = ShowstartFetcher()
-    ss_new = ss.run(keywords)
-    if cities:
-        ss_new = [s for s in ss_new if s.get("city") in cities]
+    ss_new = ss.run(styles=ShowstartFetcher.DEFAULT_STYLES, cities=cities)
 
     dm = DamaiFetcher()
-    dm_new = dm.run(keywords)
-    if cities:
-        dm_new = [s for s in dm_new if s.get("city") in cities]
+    dm_new = dm.run([])
 
     return jsonify(
         {
@@ -76,10 +73,10 @@ def notify():
         return jsonify({"notified_count": 0, "message": "推送已关闭"})
     shows, _ = get_shows()
     unnotified = [s for s in shows if not s.get("notified")]
-    count = notify_new_shows(unnotified, cfg.get("webhook_url", ""))
-    if count > 0:
-        mark_notified([s["_id"] for s in unnotified[:count]])
-    return jsonify({"notified_count": count})
+    notified_ids = notify_new_shows(unnotified, cfg.get("webhook_url", ""))
+    if notified_ids:
+        mark_notified(notified_ids)
+    return jsonify({"notified_count": len(notified_ids)})
 
 
 @app.route("/api/reset", methods=["POST"])
@@ -89,7 +86,5 @@ def reset():
 
 
 if __name__ == "__main__":
-    import os
-    from datetime import datetime, timezone
-    debug = os.environ.get("FLASK_ENV") == "development"
-    app.run(host="127.0.0.1", port=5001, debug=debug)
+    debug = __import__("os").environ.get("FLASK_ENV") == "development"
+    app.run(host="0.0.0.0", port=5001, debug=debug)

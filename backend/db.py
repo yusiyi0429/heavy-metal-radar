@@ -1,13 +1,12 @@
 import json
 import os
 import threading
-from copy import deepcopy
 
 DATA_DIR = os.path.join(os.path.dirname(__file__), "data")
 CONFIG_PATH = os.path.join(DATA_DIR, "config.json")
 SHOWS_PATH = os.path.join(DATA_DIR, "shows.json")
 
-_lock = threading.Lock()
+_lock = threading.RLock()
 
 
 def _read_json(path, default):
