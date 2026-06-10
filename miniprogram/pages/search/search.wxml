@@ -1,27 +1,44 @@
 <view class="container">
   <view class="search-bar">
-    <input
-      class="search-input"
+    <t-input
+      t-class="search-input"
+      t-class-input="search-input-inner"
       placeholder="搜索艺人名、城市..."
-      placeholder-style="color: #555"
+      placeholder-class="search-placeholder"
       value="{{query}}"
-      bindinput="onInput"
-      bindconfirm="onSearch"
+      bind:change="onInput"
       confirm-type="search"
+      clearable
+      focus
     />
-    <view class="search-btn" bindtap="onSearch">搜索</view>
+    <t-button
+      t-class="search-btn"
+      theme="danger"
+      size="small"
+      bindtap="onSearch"
+      loading="{{searching}}"
+    >
+      搜索
+    </t-button>
   </view>
 
   <view class="filter-row">
-    <label class="toggle-label">
-      <switch checked="{{onlyOnSale}}" bindchange="onToggleFilter" color="#c62828" />
-      <text>仅显示可购票</text>
-    </label>
+    <t-switch
+      label="仅显示可购票"
+      value="{{onlyOnSale}}"
+      bind:change="onToggleFilter"
+      t-class="filter-switch"
+      t-class-label="filter-label"
+    />
   </view>
 
-  <view wx:if="{{searched && shows.length === 0}}" class="empty-state">
-    <text class="empty-text">未找到匹配演出</text>
-  </view>
+  <t-empty
+    wx:if="{{searched && shows.length === 0}}"
+    icon="search"
+    description="未找到匹配演出"
+    size="small"
+    class="empty-box"
+  />
 
   <view class="show-list">
     <show-card wx:for="{{shows}}" wx:key="_id" show="{{item}}" />

@@ -5,6 +5,7 @@ Page({
     shows: [],
     cities: [],
     selectedCity: '',
+    cityIndex: 0,
     loading: true,
     refreshing: false,
     empty: false,
@@ -38,10 +39,13 @@ Page({
     // 同时拉全量数据（供城市列表）和筛选数据（供展示）
     return Promise.all([getShows({}), getShows(params)])
       .then(([all, filtered]) => {
+        const cities = this.extractCities(all.shows || [])
+        const cityIndex = Math.max(0, cities.indexOf(this.data.selectedCity))
         this.setData({
           shows: filtered.shows || [],
           empty: (filtered.shows || []).length === 0,
-          cities: this.extractCities(all.shows || []),
+          cities,
+          cityIndex,
         })
       })
       .catch(() => {
@@ -59,7 +63,7 @@ Page({
   onCityChange(e) {
     const idx = e.detail.value
     const city = this.data.cities[idx] || ''
-    this.setData({ selectedCity: city })
+    this.setData({ selectedCity: city, cityIndex: idx })
     this.loadShows()
   },
 

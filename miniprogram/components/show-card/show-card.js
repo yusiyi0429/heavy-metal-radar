@@ -8,7 +8,39 @@ Component({
     },
   },
 
+  data: {
+    statusLabel: '',
+    statusColor: '#888',
+    platformLabelText: '',
+    platformEmojiText: '',
+  },
+
+  lifetimes: {
+    attached() {
+      const show = this.properties.show || {}
+      this._updateDerived(show)
+    },
+  },
+
+  observers: {
+    'show': function (show) {
+      this._updateDerived(show)
+    },
+  },
+
   methods: {
+    _updateDerived(show) {
+      if (!show) return
+      const p = PLATFORMS[show.platform]
+      const s = STATUS_MAP[show.status]
+      this.setData({
+        statusLabel: s ? s.label : '未知',
+        statusColor: s ? s.color : '#888',
+        platformLabelText: p ? p.label : (show.platform || ''),
+        platformEmojiText: p ? p.emoji : '',
+      })
+    },
+
     onBuy() {
       const url = this.data.show.url
       if (url) {
@@ -19,20 +51,6 @@ Component({
           },
         })
       }
-    },
-
-    platformLabel() {
-      const p = PLATFORMS[this.data.show.platform]
-      return p ? p.label : this.data.show.platform
-    },
-
-    platformEmoji() {
-      const p = PLATFORMS[this.data.show.platform]
-      return p ? p.emoji : ''
-    },
-
-    statusInfo() {
-      return STATUS_MAP[this.data.show.status] || { label: '未知', color: '#888' }
     },
   },
 })

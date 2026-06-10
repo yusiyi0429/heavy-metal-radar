@@ -2,42 +2,74 @@
   <view class="section">
     <view class="section-title">关键词管理</view>
     <view class="tag-list">
-      <view class="tag" wx:for="{{keywords}}" wx:key="*this">
-        <text>{{item}}</text>
-        <text class="tag-remove" data-index="{{index}}" bindtap="removeKeyword">×</text>
-      </view>
+      <t-tag
+        wx:for="{{keywords}}"
+        wx:key="*this"
+        variant="outline"
+        size="medium"
+        closable
+        bind:close="removeKeyword"
+        data-index="{{index}}"
+        t-class="settings-tag"
+      >
+        {{item}}
+      </t-tag>
     </view>
     <view class="add-row">
-      <input
-        class="add-input"
+      <t-input
+        t-class="add-input"
+        t-class-input="add-input-inner"
         placeholder="输入关键词（中英文均可）"
-        placeholder-style="color: #555"
+        placeholder-class="add-placeholder"
         value="{{keywordInput}}"
-        bindinput="onKeywordInput"
-        bindconfirm="addKeyword"
+        bind:change="onKeywordInput"
+        confirm-type="done"
       />
-      <view class="add-btn" bindtap="addKeyword">添加</view>
+      <t-button
+        t-class="add-btn"
+        theme="default"
+        size="small"
+        bindtap="addKeyword"
+      >
+        添加
+      </t-button>
     </view>
   </view>
 
   <view class="section">
     <view class="section-title">关注城市</view>
     <view class="tag-list">
-      <view class="tag" wx:for="{{cities}}" wx:key="*this">
-        <text>{{item}}</text>
-        <text class="tag-remove" data-index="{{index}}" bindtap="removeCity">×</text>
-      </view>
+      <t-tag
+        wx:for="{{cities}}"
+        wx:key="*this"
+        variant="outline"
+        size="medium"
+        closable
+        bind:close="removeCity"
+        data-index="{{index}}"
+        t-class="settings-tag"
+      >
+        {{item}}
+      </t-tag>
     </view>
     <view class="add-row">
-      <input
-        class="add-input"
+      <t-input
+        t-class="add-input"
+        t-class-input="add-input-inner"
         placeholder="输入城市名"
-        placeholder-style="color: #555"
+        placeholder-class="add-placeholder"
         value="{{cityInput}}"
-        bindinput="onCityInput"
-        bindconfirm="addCity"
+        bind:change="onCityInput"
+        confirm-type="done"
       />
-      <view class="add-btn" bindtap="addCity">添加</view>
+      <t-button
+        t-class="add-btn"
+        theme="default"
+        size="small"
+        bindtap="addCity"
+      >
+        添加
+      </t-button>
     </view>
   </view>
 
@@ -45,15 +77,43 @@
     <view class="section-title">推送设置</view>
     <view class="toggle-row">
       <text>启用推送通知</text>
-      <switch checked="{{enablePush}}" bindchange="onPushToggle" color="#e63946" />
+      <t-switch
+        value="{{enablePush}}"
+        bind:change="onPushToggle"
+        t-class="push-switch"
+      />
     </view>
   </view>
 
-  <view class="save-btn" bindtap="onSave">
-    <text>{{saving ? '保存中...' : '保存设置'}}</text>
-  </view>
+  <t-button
+    t-class="save-btn"
+    theme="danger"
+    size="large"
+    block
+    loading="{{saving}}"
+    bindtap="onSave"
+  >
+    {{saving ? '保存中...' : '保存设置'}}
+  </t-button>
 
-  <view class="danger-btn" bindtap="onReset">
-    <text>清除演出记录</text>
-  </view>
+  <t-button
+    t-class="danger-btn"
+    theme="default"
+    variant="outline"
+    size="large"
+    block
+    bindtap="onReset"
+  >
+    清除演出记录
+  </t-button>
+
+  <t-dialog
+    visible="{{showResetDialog}}"
+    title="确认重置"
+    content="将清除所有已抓取的演出记录，确定继续？"
+    confirm-btn="确定"
+    cancel-btn="取消"
+    bind:confirm="onDialogConfirm"
+    bind:cancel="onDialogCancel"
+  />
 </view>

@@ -8,5 +8,12 @@ miniprogram/assets/tab-*.png
 .claude/
 chromium/
 node_modules/
-package-lock.json
-package.json
+/package.json
+/package-lock.json
+
+# 微信开发者工具自动生成
+miniprogram/miniprogram_npm/
+.cloudbase/
+i18n/
+miniprogram/app.miniapp.json
+project.miniapp.json

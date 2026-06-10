@@ -50,14 +50,16 @@
   text-shadow: 2px 2px 0 rgba(0,0,0,0.9);
 }
 
-.card-status {
+/* TDesign tag override for status badge */
+.status-tag {
   flex-shrink: 0;
   margin-left: 12px;
-  font-size: 9px;
-  font-weight: 900;
-  letter-spacing: 3px;
-  padding: 3px 9px;
-  color: #ffffff;
+  font-size: 9px !important;
+  font-weight: 900 !important;
+  letter-spacing: 3px !important;
+  padding: 3px 9px !important;
+  color: #ffffff !important;
+  border-radius: 0 !important;
   box-shadow: 2px 2px 0 #000000;
 }
 
@@ -119,20 +121,21 @@
   letter-spacing: 2px;
 }
 
+/* TDesign button override for buy button */
 .card-buy {
-  background: linear-gradient(180deg, #c62828, #8b1a1a);
-  border: 1px solid #7f1d1d;
-  box-shadow: 2px 2px 0 #000000;
-  color: #eeeeee;
-  font-size: 10px;
-  font-weight: 900;
-  letter-spacing: 4px;
-  padding: 5px 16px;
-  text-shadow: 1px 1px 0 rgba(0,0,0,0.6);
+  --td-button-danger-bg-color: linear-gradient(180deg, #c62828, #8b1a1a) !important;
+  --td-button-danger-border-color: #7f1d1d !important;
+  --td-button-danger-color: #eeeeee !important;
+  --td-button-border-radius: 0 !important;
+  font-size: 10px !important;
+  font-weight: 900 !important;
+  letter-spacing: 4px !important;
+  padding: 5px 16px !important;
+  box-shadow: 2px 2px 0 #000000 !important;
 }
 
 .card-buy:active {
-  background: #991b1b;
-  transform: translate(1px, 1px);
-  box-shadow: none;
+  background: #991b1b !important;
+  transform: translate(1px, 1px) !important;
+  box-shadow: none !important;
 }

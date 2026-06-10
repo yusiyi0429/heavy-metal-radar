@@ -64,32 +64,33 @@
   font-size: 10px;
 }
 
+/* TDesign button override for brutalist style */
 .refresh-btn {
-  background: linear-gradient(180deg, #c62828, #8b1a1a);
-  border: 1px solid #7f1d1d;
-  box-shadow: 3px 3px 0 #000000;
-  color: #eeeeee;
-  font-size: 11px;
-  font-weight: 900;
-  letter-spacing: 6px;
-  padding: 9px 22px;
-  text-shadow: 2px 2px 0 rgba(0,0,0,0.5);
+  --td-button-danger-bg-color: linear-gradient(180deg, #c62828, #8b1a1a) !important;
+  --td-button-danger-border-color: #7f1d1d !important;
+  --td-button-danger-color: #eeeeee !important;
+  --td-button-border-radius: 0 !important;
+  letter-spacing: 4px !important;
+  font-weight: 900 !important;
+  box-shadow: 3px 3px 0 #000000 !important;
 }
 
 .refresh-btn:active {
-  transform: translate(1px, 1px);
-  box-shadow: 1px 1px 0 #000000;
+  transform: translate(1px, 1px) !important;
+  box-shadow: 1px 1px 0 #000000 !important;
 }
 
 /* Loading */
 .loading-box {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   padding-top: 180px;
 }
 
-.loading-box text {
+.loading-text {
+  margin-top: 16px;
   font-size: 13px;
   font-weight: 800;
   letter-spacing: 6px;
@@ -104,48 +105,24 @@
 
 /* Empty */
 .empty-box {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   padding-top: 140px;
+  --td-empty-image-color: #333333;
+  --td-empty-description-color: #444444;
 }
 
-.empty-emoji {
-  font-size: 56px;
-  display: block;
-  margin-bottom: 20px;
-  opacity: 0.2;
+.empty-action {
+  margin-top: 12px;
+  text-align: center;
 }
 
-.empty-t {
-  font-size: 15px;
-  font-weight: 900;
-  letter-spacing: 6px;
-  color: #444444;
-  display: block;
-  margin-bottom: 8px;
-}
-
-.empty-h {
+.empty-hint {
   font-size: 11px;
   font-weight: 600;
   color: #333333;
   letter-spacing: 2px;
-  display: block;
 }
 
 /* List wrapper */
 .list-wrap {
   padding-top: 6px;
-}
-
-/* Refreshing toast */
-.toast {
-  text-align: center;
-  padding: 16px;
-  color: #444444;
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 4px;
 }

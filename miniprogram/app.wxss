@@ -1,9 +1,37 @@
-/* HEAVY METAL RADAR - Global */
+/* HEAVY METAL RADAR - Global Brutalist Dark Theme */
+
+/* TDesign CSS Variables - Dark Mode Override */
 page {
+  /* Brand */
+  --td-brand-color: #c62828;
+  --td-brand-color-hover: #d32f2f;
+  --td-brand-color-active: #b71c1c;
+  --td-brand-color-disabled: #5c1a1a;
+
+  /* Background */
+  --td-bg-color-page: #0a0a0a;
+  --td-bg-color-container: #0e0e0e;
+  --td-bg-color-container-hover: #151515;
+  --td-bg-color-container-active: #1a1a1a;
+
+  /* Text */
+  --td-text-color-primary: #cccccc;
+  --td-text-color-secondary: #888888;
+  --td-text-color-placeholder: #555555;
+  --td-text-color-disabled: #444444;
+  --td-text-color-anti: #ffffff;
+
+  /* Border */
+  --td-border-color: #2a2a2a;
+
+  /* Component */
+  --td-component-border-radius: 0;
+
   background: #0a0a0a;
   color: #cccccc;
   font-size: 15px;
 }
+
 .container {
   padding: 0 14px 36px;
 }

@@ -1,9 +1,15 @@
 <view class="card-wrap">
   <view class="card-head">
     <text class="card-artist">{{show.artist || show.title}}</text>
-    <view class="card-status" style="background: {{statusInfo().color}}">
-      {{statusInfo().label}}
-    </view>
+    <t-tag
+      t-class="status-tag"
+      theme="primary"
+      size="small"
+      variant="dark"
+      style="background: {{statusColor}}; border-color: {{statusColor}};"
+    >
+      {{statusLabel}}
+    </t-tag>
   </view>
   <view class="card-info">
     <text class="card-city">{{show.city}}</text>
@@ -13,8 +19,16 @@
   <view class="card-time">{{show.date}}</view>
   <view class="card-foot">
     <view class="card-platform">
-      <text>{{platformEmoji()}} {{platformLabel()}}</text>
+      <text>{{platformEmojiText}} {{platformLabelText}}</text>
     </view>
-    <view class="card-buy" bindtap="onBuy">购票</view>
+    <t-button
+      t-class="card-buy"
+      theme="danger"
+      size="extra-small"
+      variant="base"
+      bindtap="onBuy"
+    >
+      购票
+    </t-button>
   </view>
 </view>

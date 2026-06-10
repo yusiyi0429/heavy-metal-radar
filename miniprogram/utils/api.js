@@ -1,23 +1,61 @@
-const app = getApp()
+const DEFAULT_TIMEOUT = 15000
 
-function request(path, method = 'GET', data = null) {
+let _baseUrl = ''
+
+function getBaseUrl() {
+  if (_baseUrl) return _baseUrl
+  const app = getApp()
+  _baseUrl = app ? app.globalData.baseUrl : 'http://localhost:5001'
+  return _baseUrl
+}
+
+function request(path, method = 'GET', data = null, options = {}) {
   return new Promise((resolve, reject) => {
-    wx.request({
-      url: app.globalData.baseUrl + path,
+    const baseUrl = getBaseUrl()
+    let timer = null
+    let completed = false
+
+    const req = wx.request({
+      url: baseUrl + path,
       method,
       data,
       header: { 'Content-Type': 'application/json' },
+      timeout: options.timeout || DEFAULT_TIMEOUT,
       success(res) {
+        if (completed) return
+        completed = true
+        clearTimeout(timer)
         if (res.statusCode >= 200 && res.statusCode < 300) {
           resolve(res.data)
         } else {
-          reject(res)
+          const err = new Error(`HTTP ${res.statusCode}`)
+          err.statusCode = res.statusCode
+          err.data = res.data
+          reject(err)
         }
       },
       fail(err) {
+        if (completed) return
+        completed = true
+        clearTimeout(timer)
         reject(err)
       },
     })
+
+    timer = setTimeout(() => {
+      if (completed) return
+      completed = true
+      req && req.abort && req.abort()
+      reject(new Error('请求超时'))
+    }, options.timeout || DEFAULT_TIMEOUT)
+  })
+}
+
+// 带 loading 的请求封装
+function requestWithLoading(path, method, data, msg = '加载中...') {
+  wx.showLoading({ title: msg, mask: true })
+  return request(path, method, data).finally(() => {
+    wx.hideLoading()
   })
 }
 
@@ -54,6 +92,8 @@ function healthCheck() {
 }
 
 module.exports = {
+  request,
+  requestWithLoading,
   getShows,
   getConfig,
   updateConfig,

@@ -3,31 +3,36 @@
     <view class="title">重型演出雷达</view>
     <text class="subtitle">HEAVY METAL RADAR</text>
     <view class="toolbar">
-      <picker mode="selector" range="{{cities}}" value="{{cities.indexOf(selectedCity)}}" bindchange="onCityChange">
+      <picker mode="selector" range="{{cities}}" value="{{cityIndex}}" bindchange="onCityChange">
         <view class="city-btn">
           <text>{{selectedCity || '全部城市'}}</text>
           <text class="arrow">▾</text>
         </view>
       </picker>
-      <view class="refresh-btn" bindtap="onRefresh">刷新</view>
+      <t-button t-class="refresh-btn" theme="danger" size="small" bindtap="onRefresh" disabled="{{refreshing}}">
+        {{refreshing ? '刷新中...' : '刷新'}}
+      </t-button>
     </view>
   </view>
 
   <view wx:if="{{loading && shows.length === 0}}" class="loading-box">
-    <text>LOADING...</text>
+    <t-loading theme="circular" size="60rpx" />
+    <text class="loading-text">LOADING...</text>
   </view>
 
-  <view wx:elif="{{empty}}" class="empty-box">
-    <text class="empty-emoji">🎸</text>
-    <text class="empty-t">暂无演出</text>
-    <text class="empty-h">点击刷新开始抓取</text>
-  </view>
+  <t-empty
+    wx:elif="{{empty}}"
+    icon="internet"
+    description="暂无演出"
+    size="small"
+    class="empty-box"
+  >
+    <view slot="action" class="empty-action">
+      <text class="empty-hint">点击刷新开始抓取</text>
+    </view>
+  </t-empty>
 
   <view wx:else class="list-wrap">
     <show-card wx:for="{{shows}}" wx:key="_id" show="{{item}}" />
-  </view>
-
-  <view wx:if="{{refreshing}}" class="toast">
-    <text>REFRESHING...</text>
   </view>
 </view>

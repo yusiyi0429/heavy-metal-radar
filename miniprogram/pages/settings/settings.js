@@ -8,6 +8,7 @@ Page({
     cityInput: '',
     enablePush: true,
     saving: false,
+    showResetDialog: false,
   },
 
   onLoad() {
@@ -21,8 +22,9 @@ Page({
         cities: cfg.cities || [],
         enablePush: cfg.enable_push !== false,
       })
-    }).catch(() => {
-      wx.showToast({ title: '加载配置失败', icon: 'none' })
+    }).catch(err => {
+      const msg = err.message === '请求超时' ? '请求超时' : '加载配置失败'
+      wx.showToast({ title: msg, icon: 'none' })
     })
   },
 
@@ -88,27 +90,30 @@ Page({
       .then(() => {
         wx.showToast({ title: '保存成功', icon: 'success' })
       })
-      .catch(() => {
-        wx.showToast({ title: '保存失败', icon: 'none' })
+      .catch(err => {
+        const msg = err.message === '请求超时' ? '请求超时' : '保存失败'
+        wx.showToast({ title: msg, icon: 'none' })
       })
       .finally(() => this.setData({ saving: false }))
   },
 
   onReset() {
-    wx.showModal({
-      title: '确认重置',
-      content: '将清除所有已抓取的演出记录，确定继续？',
-      success: res => {
-        if (res.confirm) {
-          resetData()
-            .then(() => {
-              wx.showToast({ title: '已重置', icon: 'success' })
-            })
-            .catch(() => {
-              wx.showToast({ title: '重置失败', icon: 'none' })
-            })
-        }
-      },
-    })
+    this.setData({ showResetDialog: true })
+  },
+
+  onDialogConfirm() {
+    this.setData({ showResetDialog: false })
+    resetData()
+      .then(() => {
+        wx.showToast({ title: '已重置', icon: 'success' })
+      })
+      .catch(err => {
+        const msg = err.message === '请求超时' ? '请求超时' : '重置失败'
+        wx.showToast({ title: msg, icon: 'none' })
+      })
+  },
+
+  onDialogCancel() {
+    this.setData({ showResetDialog: false })
   },
 })

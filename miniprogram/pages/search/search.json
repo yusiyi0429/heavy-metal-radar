@@ -1,5 +1,8 @@
 {
   "usingComponents": {
-    "show-card": "../../components/show-card/show-card"
+    "show-card": "../../components/show-card/show-card",
+    "t-input": "tdesign-miniprogram/input/input",
+    "t-button": "tdesign-miniprogram/button/button",
+    "t-switch": "tdesign-miniprogram/switch/switch"
   }
 }

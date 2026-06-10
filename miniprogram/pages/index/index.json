@@ -1,6 +1,9 @@
 {
   "usingComponents": {
-    "show-card": "../../components/show-card/show-card"
+    "show-card": "../../components/show-card/show-card",
+    "t-loading": "tdesign-miniprogram/loading/loading",
+    "t-empty": "tdesign-miniprogram/empty/empty",
+    "t-button": "tdesign-miniprogram/button/button"
   },
   "enablePullDownRefresh": true
 }

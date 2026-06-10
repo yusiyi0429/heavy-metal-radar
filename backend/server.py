@@ -8,6 +8,13 @@ from backend.notifier.wecom_bot import notify_new_shows
 app = Flask(__name__)
 
 
+@app.before_request
+def log_request():
+    import logging
+    app.logger.setLevel(logging.INFO)
+    app.logger.info("=> %s %s from %s", request.method, request.path, request.remote_addr)
+
+
 def _cors(response):
     response.headers["Access-Control-Allow-Origin"] = "*"
     response.headers["Access-Control-Allow-Methods"] = "GET, POST, PUT, DELETE, OPTIONS"
